@@ -46,13 +46,13 @@ const Footer = () => {
     {
       name: "LinkedIn",
       icon: <FaLinkedin />,
-      link: "#",
+      link: "https://www.linkedin.com/in/shubham-patidar-458821288/",
       color: "bg-blue-600 hover:bg-blue-700"
     },
     {
       name: "GitHub",
       icon: <FaGithub />,
-      link: "#",
+      link: "https://github.com/shuhamPATIDAR",
       color: "bg-gray-800 hover:bg-gray-900"
     },
     {

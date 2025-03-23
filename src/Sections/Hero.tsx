@@ -28,13 +28,13 @@ const Hero = () => {
     {
       name: 'GitHub',
       icon: <FaGithub />,
-      url: 'https://github.com/',
+      url: 'https://github.com/shuhamPATIDAR',
       color: 'hover:text-gray-300'
     },
     {
       name: 'LinkedIn',
       icon: <FaLinkedin />,
-      url: 'https://linkedin.com/',
+      url: 'https://www.linkedin.com/in/shubham-patidar-458821288/',
       color: 'hover:text-blue-400'
     },
     {
@@ -101,7 +101,7 @@ const Hero = () => {
       transition: {
         duration: 1,
         repeat: Infinity,
-        repeatType: "loop",
+        repeatType: "loop" as const,
         ease: "linear",
       }
     }
@@ -233,11 +233,12 @@ const Hero = () => {
                   </motion.a>
                   
                   <motion.a 
-                    href="#"
+                    href="/Shubham_Resume.docx"
                     className="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-6 py-3 rounded-lg font-medium shadow-lg inline-flex items-center gap-2"
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
+                    download
                   >
                     <FaDownload className="text-blue-400" />
                     Download CV
