@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaDownload } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const containerVariants = {
@@ -94,52 +95,42 @@ const Hero = () => {
     tap: { scale: 0.95 }
   };
 
-  const typewriterVariants = {
-    hidden: { width: "0%" },
-    visible: { 
-      width: "100%",
-      transition: { 
-        duration: 2.5,
-        delay: 1,
-        ease: "easeInOut"
+  const cursorVariants = {
+    blinking: {
+      opacity: [0, 0, 1, 1],
+      transition: {
+        duration: 1,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
       }
     }
   };
 
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
+  const fullText = "Data Science Enthusiast & Developer";
+  
+  useEffect(() => {
+    if (index < fullText.length) {
+      const timeout = setTimeout(() => {
+        setText(prevText => prevText + fullText[index]);
+        setIndex(prevIndex => prevIndex + 1);
+      }, 100);
+      
+      return () => clearTimeout(timeout);
+    }
+  }, [index, fullText]);
+
   return (
     <div className="relative min-h-screen w-full bg-gradient-to-r from-gray-900 to-black text-white overflow-hidden">
-      {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-[150px] opacity-10 transform translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500 rounded-full filter blur-[150px] opacity-10 transform -translate-x-1/2 translate-y-1/2"></div>
       <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400 rounded-full filter blur-[80px] opacity-5"></div>
       <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-purple-400 rounded-full filter blur-[100px] opacity-5"></div>
       
-      {/* Animated particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full bg-blue-400"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: 0.3 + Math.random() * 0.4
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.3, 0.6, 0.3]
-            }}
-            transition={{
-              duration: 3 + Math.random() * 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
-      </div>
-
+      {/* Removing the animated background dots section */}
+      
       <motion.div 
         id="hero" 
         className="min-h-screen w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10"
@@ -147,14 +138,13 @@ const Hero = () => {
         animate="visible"
         variants={containerVariants}
       >
-        <div className="container mx-auto">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-            {/* Content Side */}
+        <div className="container mx-auto px-28">
+          <div className="mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-2">
             <motion.div 
               className="w-full lg:w-1/2 space-y-5 sm:space-y-6 text-center lg:text-left order-2 lg:order-1"
               variants={containerVariants}
             >
-              <div className="max-w-xl mx-auto lg:mx-0">
+              <div className="max-w-xl mx-auto lg:mx-0 ">
                 <motion.div 
                   className="inline-block px-4 py-1 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 mb-4"
                   variants={itemVariants}
@@ -175,12 +165,14 @@ const Hero = () => {
                   className="overflow-hidden h-8 sm:h-10 mb-4"
                   variants={itemVariants}
                 >
-                  <motion.div
-                    className="text-xl sm:text-2xl text-gray-300 font-medium"
-                    variants={typewriterVariants}
-                  >
-                    Data Science Enthusiast & Developer
-                  </motion.div>
+                  <div className="text-xl sm:text-2xl text-gray-300 font-medium flex">
+                    <span>{text}</span>
+                    <motion.span
+                      variants={cursorVariants}
+                      animate="blinking"
+                      className="inline-block w-[2px] h-[1em] bg-blue-400 ml-1"
+                    />
+                  </div>
                 </motion.div>
                 
                 <motion.p 
@@ -254,13 +246,11 @@ const Hero = () => {
               </div>
             </motion.div>
             
-            {/* Image Side */}
             <motion.div 
               className="w-full lg:w-1/2 flex justify-center order-1 lg:order-2 mb-8 lg:mb-0"
               variants={containerVariants}
             >
               <div className="relative">
-                {/* Animated background circles */}
                 <motion.div
                   className="absolute top-1/2 left-1/2 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] rounded-full bg-blue-500/10"
                   style={{ translateX: "-50%", translateY: "-50%" }}
@@ -288,7 +278,6 @@ const Hero = () => {
                   }}
                 />
                 
-                {/* Main profile circle */}
                 <motion.div
                   className="relative w-[250px] h-[250px] sm:w-[280px] sm:h-[280px] rounded-full overflow-hidden border-4 border-gray-800 shadow-xl"
                   variants={imageVariants}
@@ -297,7 +286,6 @@ const Hero = () => {
                   <div className="absolute inset-0 flex items-center justify-center text-8xl text-blue-400">SP</div>
                 </motion.div>
                 
-                {/* Decorative elements */}
                 <motion.div
                   className="absolute top-0 right-0 w-12 h-12 rounded-full bg-blue-500/30"
                   initial={{ scale: 0, opacity: 0 }}
@@ -322,7 +310,6 @@ const Hero = () => {
         </div>
       </motion.div>
       
-      {/* Scroll down indicator */}
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-blue-400"
         initial="initial"
