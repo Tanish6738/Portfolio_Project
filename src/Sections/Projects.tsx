@@ -5,6 +5,7 @@ import {
   FaHospital, FaDatabase, FaRobot, FaArrowRight
 } from 'react-icons/fa';
 import { SiJavascript, SiHtml5, SiCss3 } from 'react-icons/si';
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -358,15 +359,16 @@ const Projects = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <motion.a
-              href="#"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-shadow"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View All Projects
-              <FaArrowRight />
-            </motion.a>
+            <Link to="/projects">
+              <motion.button
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-shadow"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View All Projects
+                <FaArrowRight />
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </motion.div>
