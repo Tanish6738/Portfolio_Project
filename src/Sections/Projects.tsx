@@ -110,7 +110,7 @@ const Projects = () => {
   ];
 
   return (
-    <div className="relative min-h-screen w-full bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
+    <section id="projects" className="relative min-h-screen w-full bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-20 right-0 w-64 h-64 bg-blue-500 rounded-full filter blur-[120px] opacity-10"></div>
       <div className="absolute bottom-20 left-0 w-64 h-64 bg-purple-500 rounded-full filter blur-[120px] opacity-10"></div>
@@ -144,7 +144,7 @@ const Projects = () => {
       </div>
 
       <motion.div 
-        id="projects" 
+        
         className="min-h-screen w-full py-20 px-4 sm:px-6 lg:px-8 relative z-10"
         initial="hidden"
         whileInView="visible"
@@ -370,7 +370,7 @@ const Projects = () => {
           </motion.div>
         </div>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

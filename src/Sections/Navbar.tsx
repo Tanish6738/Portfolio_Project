@@ -44,13 +44,22 @@ const Navbar = () => {
   // Smooth scroll to section
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.replace('#', ''));
+    
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
+      // Log for debugging
+      console.log(`Scrolling to section: ${sectionId}, element:`, element);
+      
+      // Use a small timeout to ensure the DOM is ready
+      setTimeout(() => {
+        window.scrollTo({
+          top: element.offsetTop - 80,
+          behavior: 'smooth'
+        });
+        setIsOpen(false);
+      }, 100);
+    } else {
+      console.error(`Element with ID "${sectionId}" not found`);
     }
-    setIsOpen(false);
   };
 
   // Navbar sections

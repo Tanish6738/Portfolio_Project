@@ -122,6 +122,19 @@ const Hero = () => {
     }
   }, [index, fullText]);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId.replace('#', ''));
+    if (element) {
+      console.log(`Hero scrolling to: ${sectionId}, element:`, element);
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    } else {
+      console.error(`Element with ID "${sectionId}" not found from Hero`);
+    }
+  };
+
   return (
     <div className="relative min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden">
       {/* Enhanced background gradients */}
@@ -224,6 +237,10 @@ const Hero = () => {
                 >
                   <motion.a 
                     href="#projects"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection('projects');
+                    }}
                     className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 px-6 py-3 rounded-lg font-medium shadow-lg shadow-blue-900/20 inline-flex items-center gap-2 transition-all duration-300"
                     variants={buttonVariants}
                     whileHover="hover"
